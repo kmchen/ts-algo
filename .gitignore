@@ -1,0 +1,15 @@
+*.map
+*.zip
+*.js
+!webpack.config.js
+!Gruntfile.js
+rancher/development/data/
+node_modules/
+typings/
+config/local.yaml
+testdata
+coverage
+.idea
+.vscode
+.tscache
+local.env
