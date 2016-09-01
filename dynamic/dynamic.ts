@@ -1,6 +1,29 @@
 import * as _ from 'lodash';
 
-var longestCommonSeq = function(str1: string, str2: string): string {
+export var longestIncreasingSeq = function(str: number[]): number {
+  var list: number[] = _.times(str.length, () => {
+    return 1; 
+  })
+   
+  for(let outIdx = 1; outIdx < str.length; outIdx++) {
+    for(let inIdx = 0; inIdx < outIdx; inIdx++) {
+     if(str[inIdx] < str[outIdx] && list[outIdx] < list[inIdx]+1)
+       list[outIdx]++;
+    } 
+  } 
+  return max(list) 
+}
+
+var max = function(list): number {
+  var cloneList = _.clone(list);
+  var max = cloneList.shift();
+  _.forEach(cloneList, (key) => {
+    max = key > max? key:max
+  })
+  return max
+}
+
+export var longestCommonSeq = function(str1: string, str2: string): string {
   let l1: number = str1.length+1;
   let l2: number = str2.length+1;
   let traceMap: number[][];
@@ -39,4 +62,3 @@ var longestCommonSeq = function(str1: string, str2: string): string {
   }
   return str;
 }
-export = longestCommonSeq;
