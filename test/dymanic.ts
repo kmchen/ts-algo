@@ -27,5 +27,7 @@ describe('Dynamic programming', function() {
       expect(LongestPalindromeSeq(list)).to.be.equal(7);
       let str = "GEEKSFORGEEKS"
       expect(LongestPalindromeSeq(str.split(""))).to.be.equal(5);
+      str = "GEEKS FOR GEEKS"
+      expect(LongestPalindromeSeq(str.split(""))).to.be.equal(7);
     });
 });
