@@ -1,28 +1,63 @@
 import * as _ from 'lodash';
 
+// Find the longest palindrome subsequence in a given sequence
+// Complexity : time & space both => O(n^2)
+export var LongestPalindromeSeq = function(list: string[]): number {
+  // Create a 2D array
+  let map: any[] = [];
+  _.forEach(list, (val1, key1) => {
+    var row: number[] = []
+    _.forEach(list, (val2, key2) => {
+      if(key1 == key2) {
+        row.push(1) 
+      } else {
+        row.push(0) 
+      }
+    });
+    map.push(row);
+  });
+
+  var maxDist = list.length -1;
+  for(let dist = 1; dist <= maxDist; dist++) {
+    for(let left = 0; left <= maxDist-dist; left++) {
+      let right = left + dist
+      // First and last chars are identical
+      if (list[left] == list[right] && dist == 1) {
+        map[left][right] = 2
+      } else if (list[left] == list[right]) {
+        map[left][right] = map[left+1][right-1] + 2
+      } else {
+        map[left][right] = max([map[left][right-1], map[left+1][right]])
+      }
+    }
+    // Uncomment for debug purpose
+    //_.forEach(map, (val) => {
+      //console.log(val);
+    //})
+  }
+  return map[0][maxDist];
+}
+
+// http://algorithm.yuanbin.me/zh-hans/exhaustive_search/palindrome_partitioning.html
+// Find the length of the longest subsequence of a given sequence such that
+// all elements of the subsequnece are sorted in increasing order
+// Complexity: time -> O(nlong(n)), space -> O(n)
 export var longestIncreasingSeq = function(str: number[]): number {
   var list: number[] = _.times(str.length, () => {
     return 1; 
   })
-   
+
   for(let outIdx = 1; outIdx < str.length; outIdx++) {
     for(let inIdx = 0; inIdx < outIdx; inIdx++) {
-     if(str[inIdx] < str[outIdx] && list[outIdx] < list[inIdx]+1)
-       list[outIdx]++;
+      if(str[inIdx] < str[outIdx] && list[outIdx] < list[inIdx]+1)
+        list[outIdx]++;
     } 
   } 
   return max(list) 
 }
 
-var max = function(list): number {
-  var cloneList = _.clone(list);
-  var max = cloneList.shift();
-  _.forEach(cloneList, (key) => {
-    max = key > max? key:max
-  })
-  return max
-}
-
+// Find the longest subsequence common to all sequences in a set of sequences
+// Complexity: time -> O(m x n), space -> O(m x n)
 export var longestCommonSeq = function(str1: string, str2: string): string {
   let l1: number = str1.length+1;
   let l2: number = str2.length+1;
@@ -61,4 +96,13 @@ export var longestCommonSeq = function(str1: string, str2: string): string {
     }
   }
   return str;
+}
+
+var max = function(list): number {
+  var cloneList = _.clone(list);
+  var max = cloneList.shift();
+  _.forEach(cloneList, (key) => {
+    max = key > max? key:max
+  })
+  return max
 }

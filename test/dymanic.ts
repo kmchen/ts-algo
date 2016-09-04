@@ -1,5 +1,10 @@
 var expect = require('chai').expect;
-import {longestCommonSeq, longestIncreasingSeq} from '../dynamic/dynamic'
+import {
+  longestCommonSeq,
+  longestIncreasingSeq,
+  LongestPalindromeSeq
+} from '../dynamic/dynamic'
+
 describe('Dynamic programming', function() {
     it('should return longest common sequence', function() {
       let str1 = 'AGGTAB';
@@ -16,5 +21,11 @@ describe('Dynamic programming', function() {
       expect(longestIncreasingSeq(list)).to.be.equal(4);
       list = [10]
       expect(longestIncreasingSeq(list)).to.be.equal(1);
+    });
+    it('should return Longest Palindrome sequence', function() {
+      let list = ["B", "B", "A", "B", "C","B","C","A", "B"];
+      expect(LongestPalindromeSeq(list)).to.be.equal(7);
+      let str = "GEEKSFORGEEKS"
+      expect(LongestPalindromeSeq(str.split(""))).to.be.equal(5);
     });
 });
