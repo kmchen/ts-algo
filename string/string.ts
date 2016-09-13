@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-// Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+// Implement SubString function that returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
 // Complexity: time -> O(n^2)
 // Optimization time -> O(n) using KMP
 export var SubString = function(str1: string, str2: string): number {
@@ -15,19 +15,27 @@ export var SubString = function(str1: string, str2: string): number {
     }
   }
   return -1
-  //_.forEach(str1, (val1, key) => {
-    //let found = false;
-    //for (let i = 0; i < str2.length; i++) {
-      //if (str1[key+i] != str2[i]) {
-        //found = false;
-        //break;
-      //}
-      //found = true;
-    //}
-    //if (found) {
-      //index = key;
-      //return false;
-    //}
-  //})
-  //return index
+}
+
+// Anagram(sting, string) bool
+// Note : Two strings are anagram if they can be the same after change the order of characters.
+// Solution 1 : Hashing
+// Solution 2 : Sorting
+export var Anagram = function(str1: string, str2: string): boolean {
+  let hash = {};
+  if(str1.length != str2.length) {
+    return false 
+  }
+  _.forIn(str1, (val, key) => {
+    hash[val] = hash[val]? hash[val]+1:1
+    hash[str2[key]] = hash[str2[key]]? hash[str2[key]]+1:1
+  });
+  let result = true;
+  _.forIn(hash, (val, idx) => {
+    if (val%2 != 0) {
+      result = false;
+      return false 
+    }
+  });
+  return result;
 }
