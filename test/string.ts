@@ -1,7 +1,8 @@
 var expect = require('chai').expect;
 import {
   SubString,
-  Anagram
+  Anagram,
+  LongestCommonSubstring
 } from '../string/string'
 
 describe('String Manipulation', function() {
@@ -14,15 +15,23 @@ describe('String Manipulation', function() {
       expect(SubString(str1, str2)).to.be.equal(1);
     });
     it('should implement Anagram function', function() {
-      //let str1 = 'abcd';
-      //let str2 = 'dcab';
-      //expect(Anagram(str1, str2)).to.be.equal(true);
-      //str1 = 'ab';
-      //str2 = 'ab';
-      //expect(Anagram(str1, str2)).to.be.equal(true);
-      let str1 = 'ab';
-      let str2 = 'ac';
+      let str1 = 'abcd';
+      let str2 = 'dcab';
+      expect(Anagram(str1, str2)).to.be.equal(true);
+      str1 = 'ab';
+      str2 = 'ab';
+      expect(Anagram(str1, str2)).to.be.equal(true);
+      str1 = 'ab';
+      str2 = 'ac';
       expect(Anagram(str1, str2)).to.be.equal(false);
+    });
+    it('should implement longest common substring function', function() {
+      let str1 = 'abcd';
+      let str2 = 'cbce';
+      expect(LongestCommonSubstring(str1, str2)).to.be.equal(2);
+      str1 = 'abcdabcdacbd';
+      str2 = 'cdabxdcdabc';
+      expect(LongestCommonSubstring(str1, str2)).to.be.equal(5);
     });
 });
 

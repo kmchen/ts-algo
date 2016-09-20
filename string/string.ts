@@ -39,3 +39,37 @@ export var Anagram = function(str1: string, str2: string): boolean {
   });
   return result;
 }
+
+// GroupAnagrams([]string): [][]string
+// Given an array of strings, group anagrams together.+
+// Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
+// Return:
+// [ ["ate", "eat","tea"], ["nat","tan"], ["bat"] ]
+// Solution: Sort each string then use hash map
+
+// LongestCommonSubstring(:string, :string): number
+// Given two strings, find the longest common substring. Return the length of it.
+// Given A="ABCD", B="CBCE", return 2.
+// Note: The characters in substring should occur continuously in original string.
+// This is different with subsequence.
+// Time complexity: O(mn⋅lcs)
+export let LongestCommonSubstring = function(str1: string, str2: string): number {
+  let max = 0;
+  for(let i = 0; i < str1.length; i++) {
+    for(let j = 0; j < str2.length; j++) {
+      if (str1[i] == str2[j]) {
+        let size = 1;
+        let continuous = true;
+        for(let k = j+1, t = i+1; t < str1.length && k < str2.length; k++, t++){
+          if (str1[t] == str2[k] && continuous) {
+            size++;
+          } else {
+            continuous = false
+          }
+        }
+        max = size > max ? size:max
+      }
+    }
+  }
+  return max
+}
