@@ -12,7 +12,6 @@ func TestReverseWord(t *testing.T) {
 }
 
 func TestValidPalindrome(t *testing.T) {
-
 	str := "A man, a plan, a canal: Panama"
 	result := ValidPalindrom(str)
 	if result != true {
@@ -22,5 +21,13 @@ func TestValidPalindrome(t *testing.T) {
 	result = ValidPalindrom(str)
 	if result != false {
 		t.Fatalf("Expected %v, got %v", false, result)
+	}
+}
+
+func TestLongestPalindromicSubstring(t *testing.T) {
+	str := "abcdzdcab"
+	result := LongestPalindromicSubstring(str)
+	if result != "cdzdc" {
+		t.Fatalf("Expected %v, got %v", "cdzdc", result)
 	}
 }

@@ -42,7 +42,6 @@ func revertString(str string) string {
 //we define empty string as valid palindrome.
 //Challenge: O(n) time without extra memory.
 //Hint: Use two indices
-
 func ValidPalindrom(str string) bool {
 	last := len(str) - 1
 	first := 0
@@ -69,3 +68,49 @@ func isChar(char byte) bool {
 	}
 	return false
 }
+
+//LongestPalindromicSubstring(string):string
+//You may assume that the maximum length of S is 1000,
+//and there exists one unique longest palindromic substring.
+//e.g. "abcdzdcab" => "cdzdc".
+//Challenge : O(n2) time is acceptable. Can you do it in O(n) time.
+func LongestPalindromicSubstring(str string) string {
+	var result string
+	for i := 0; i < len(str); i++ {
+		for j := len(str) - 1; j >= i; j-- {
+			if string(str[i]) != string(str[j]) {
+				continue
+			}
+			if isPalindrome(str[i : j+1]) {
+				if len(str[i:j+1]) > len(result) {
+					result = str[i : j+1]
+					break
+				}
+			}
+		}
+	}
+	return result
+}
+
+func isPalindrome(str string) bool {
+	for i := 0; i < len(str); i++ {
+		lastIdx := len(str) - i - 1
+		if string(str[i]) != string(str[lastIdx]) {
+			return false
+		}
+	}
+	return true
+}
+
+//Implement wildcard pattern matching with support for '?' and '*'.
+//'?' Matches any single character.
+//'*' Matches any sequence of characters (including the empty sequence).
+//The matching should cover the entire input string (not partial).
+//Example
+//isMatch("aa","a") → false
+//isMatch("aa","aa") → true
+//isMatch("aaa","aa") → false
+//isMatch("aa", "*") → true
+//isMatch("aa", "a*") → true
+//isMatch("ab", "?*") → true
+//isMatch("aab", "c*a*b") → false
